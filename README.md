@@ -14,7 +14,7 @@ API for Network Laranja, a web system with a home page that features a simple se
 
 1. Clone the repository:
     ```sh
-    git clone [https://github.com/yourusername/api-orange-network.git](https://github.com/xtaveira/api-orange-network.git)
+    git clone [https://github.com/xtaveira/api-orange-network.git](https://github.com/xtaveira/api-orange-network.git)
     ```
 
 2. Change to the project directory:
