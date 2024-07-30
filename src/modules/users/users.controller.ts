@@ -30,11 +30,6 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
-  @Get('/pass/:id')
-  async findUser(@Param('id') id: string) {
-    return this.usersService.findUser(id);
-  }
-
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);

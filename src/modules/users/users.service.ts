@@ -15,22 +15,28 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    const users = await this.userModel.find().select('-password').exec();
-    return users;
+    return await this.userModel.find().select('-password').exec();
   }
 
-  async findOne(id: string): Promise<User> {
-    const user = await this.userModel.findById(id).select('-password').exec();
+  async findOne(orangeId: string): Promise<User> {
+    const user = await this.userModel
+      .findOne({ orangeId })
+      .select('-password')
+      .exec();
     if (!user) {
-      throw new NotFoundException(`User with ID "${id}" not found`);
+      throw new NotFoundException(
+        `User with Orange ID "${orangeId}" not found`,
+      );
     }
     return user;
   }
 
-  async findUser(id: string): Promise<User> {
-    const user = await this.userModel.findById(id).exec();
+  async checkUser(orangeId: string): Promise<User> {
+    const user = await this.userModel.findOne({ orangeId }).exec();
     if (!user) {
-      throw new NotFoundException(`User with ID "${id}" not found`);
+      throw new NotFoundException(
+        `User with Orange ID "${orangeId}" not found`,
+      );
     }
     return user;
   }
