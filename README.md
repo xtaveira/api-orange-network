@@ -1,73 +1,119 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# API Orange Network
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API for Network Laranja, a web system with a home page that features a simple search bar for services. These services are registered by users, known as "Homens de Laranja". The backend API is built using NestJS and connects to a MongoDB Atlas database.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Table of Contents
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [API Endpoints](#api-endpoints)
+- [Environment Variables](#environment-variables)
+- [Project Structure](#project-structure)
+- [License](#license)
 
 ## Installation
 
-```bash
-$ npm install
-```
+1. Clone the repository:
+    ```sh
+    git clone [https://github.com/xtaveira/api-orange-network.git](https://github.com/xtaveira/api-orange-network.git)
+    ```
 
-## Running the app
+2. Change to the project directory:
+    ```sh
+    cd api-orange-network
+    ```
 
-```bash
-# development
-$ npm run start
+3. Install the dependencies:
+    ```sh
+    npm install
+    ```
 
-# watch mode
-$ npm run start:dev
+## Running the Application
 
-# production mode
-$ npm run start:prod
-```
+1. Create a `.env` file in the root directory and add your MongoDB connection string:
+    ```env
+    MONGO_URI=your_mongodb_connection_string
+    ```
 
-## Test
+2. Start the application in development mode:
+    ```sh
+    npm run start:dev
+    ```
 
-```bash
-# unit tests
-$ npm run test
+3. The application will be running at `http://localhost:3000`.
 
-# e2e tests
-$ npm run test:e2e
+## API Endpoints
 
-# test coverage
-$ npm run test:cov
-```
+### Users
 
-## Support
+- **Create User**
+    - `POST /users`
+    - Body: `{ "name": "John Doe", "orangeId": "12345", "contact": "123-456-7890", "password": "password", "email": "john@example.com", "city": "Some City", "state": "Some State" }`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **Get All Users**
+    - `GET /users`
 
-## Stay in touch
+- **Get User by ID**
+    - `GET /users/:id`
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- **Update User**
+    - `PUT /users/:id`
+    - Body: `{ "name": "John Doe", "orangeId": "12345", "contact": "123-456-7890", "password": "newpassword", "email": "john@example.com", "city": "Some City", "state": "Some State" }`
+
+- **Delete User**
+    - `DELETE /users/:id`
+
+### Services
+
+- **Create Service**
+    - `POST /services`
+    - Body: `{ "name": "Service Name", "contact": "123-456-7890", "description": "Service Description", "tags": ["tag1", "tag2"], "image": "image_url", "userId": "user_id" }`
+
+- **Get All Services**
+    - `GET /services`
+
+- **Get Service by ID**
+    - `GET /services/:id`
+
+- **Update Service**
+    - `PUT /services/:id`
+    - Body: `{ "name": "Service Name", "contact": "123-456-7890", "description": "Service Description", "tags": ["tag1", "tag2"], "image": "image_url" }`
+
+- **Delete Service**
+    - `DELETE /services/:id`
+
+## Environment Variables
+
+The following environment variables are used in the project:
+
+- `MONGO_URI`: The connection string for MongoDB Atlas.
+
+## Project Structure
+
+src/
+├── app.module.ts
+├── main.ts
+├── modules/
+│ ├── users/
+│ │ ├── dto/
+│ │ │ ├── create-user.dto.ts
+│ │ │ ├── update-user.dto.ts
+│ │ ├── schemas/
+│ │ │ └── user.schema.ts
+│ │ ├── users.controller.ts
+│ │ ├── users.module.ts
+│ │ └── users.service.ts
+│ ├── services/
+│ │ ├── dto/
+│ │ │ ├── create-service.dto.ts
+│ │ │ ├── update-service.dto.ts
+│ │ ├── schemas/
+│ │ │ └── service.schema.ts
+│ │ ├── services.controller.ts
+│ │ ├── services.module.ts
+│ │ └── services.service.ts
+
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the UNLICENSED License - see the [LICENSE](LICENSE) file for details.
+
