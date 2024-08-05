@@ -15,7 +15,7 @@ export class CreateUserDto {
 
   @IsDefined({ message: 'Password is required' })
   @IsString({ message: 'Password must be a string' })
-  readonly password!: string;
+  password!: string;
 
   @IsDefined({ message: 'Email is required' })
   @IsEmail({}, { message: 'Email must be a valid email address' })

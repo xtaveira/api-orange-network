@@ -4,12 +4,19 @@ import { Model } from 'mongoose';
 import { User } from './interfaces/user.interface';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
   constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
+    const salt = await bcrypt.genSalt();
+    const password = createUserDto.password;
+    const hash = await bcrypt.hash(password, salt);
+
+    createUserDto.password = hash;
+
     const createdUser = new this.userModel(createUserDto);
     return await createdUser.save();
   }
@@ -38,6 +45,7 @@ export class UsersService {
         `User with Orange ID "${orangeId}" not found`,
       );
     }
+
     return user;
   }
 
